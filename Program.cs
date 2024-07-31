@@ -70,11 +70,11 @@ Console.WriteLine($"students length = {students.Length}, numberArrays length = {
 
 
 // foreach遍历数组
-int i = 0;
+int c = 0;
 foreach (var student in students)
 {
-    i++;
-    Console.WriteLine($"{i} = {student}");
+    c++;
+    Console.WriteLine($"{c} = {student}");
 }
 
 
@@ -156,3 +156,69 @@ switch (product[0])
 }
 
 Console.WriteLine(type);
+
+
+// 练习 for和if
+/*
+在迭代语句的代码块内输出从 1 到 100 的值，每行一个数字。
+如果当前值可被 3 整除，则在该数字旁打印 Fizz。
+如果当前值可被 5 整除，则在该数字旁打印 Buzz。
+如果当前值可同时被 3 和 5 整除，则在该数字旁打印 FizzBuzz。
+*/
+for (int i = 1; i <= 100; i++)
+{
+    Console.WriteLine(i);
+    if (i % 3 == 0)
+    {
+        Console.WriteLine("Fizz");
+    }
+    else if (i % 5 == 0)
+    {
+        Console.WriteLine("Buzz");
+    }
+    else if (i % 3 == 0 && i % 5 == 0)
+    {
+        Console.WriteLine("FizzBuzz");
+    }
+}
+
+
+
+// do while 和 while
+int aNum = 0;
+do
+{
+    aNum++;
+    Console.WriteLine(aNum);
+} while( aNum != 7);
+
+while (aNum != 10)
+{
+    aNum++;
+    Console.WriteLine(aNum);
+}
+
+// 声明变量
+string? userName = null;
+string userNameBak = null;  // 不写? 编译器会发出警告
+Console.WriteLine(userNameBak);
+
+// 声明二维数组
+string[,] twoArray = new string[2,2];
+twoArray[0,0] = "1";
+twoArray[0,1] = "2";
+twoArray[1,0] = "3";
+twoArray[1,1] = "4";
+foreach (var se in twoArray)
+{  
+    Console.WriteLine($"{se} ");
+}
+
+// for 循环遍历二维数组
+for (var i = 0; i < twoArray.GetLength(0); i++)
+{
+    for (var i1 = 0; i1 < twoArray.GetLength(1); i1++)
+    {
+        Console.WriteLine($"{twoArray[i, i1]}");
+    }
+}
