@@ -1,5 +1,8 @@
 ﻿// See https://aka.ms/new-console-template for more information
 // 输出
+
+using System.Threading.Channels;
+
 Console.WriteLine("Hello World!");
 
 //变量 字符串拼接
@@ -222,3 +225,134 @@ for (var i = 0; i < twoArray.GetLength(0); i++)
         Console.WriteLine($"{twoArray[i, i1]}");
     }
 }
+
+
+
+// 有符号整形
+Console.WriteLine("-------------------");
+Console.WriteLine($"sbyte:{sbyte.MinValue} and {sbyte.MaxValue}"); // sbyte 表示有符号性，  byte表示无符号
+Console.WriteLine($"short:{short.MinValue} and {short.MaxValue}");
+Console.WriteLine($"int:{int.MinValue} and {int.MaxValue}");
+Console.WriteLine($"long:{long.MinValue} and {long.MaxValue}");
+
+
+// 无符号整形
+Console.WriteLine("---------------------------");
+Console.WriteLine($"byte: {byte.MinValue} and {byte.MaxValue}");
+Console.WriteLine($"ushort: {ushort.MinValue} and {ushort.MaxValue}");
+Console.WriteLine($"uint: {uint.MinValue} and {uint.MaxValue}");
+Console.WriteLine($"ulong:{ulong.MinValue} and {ulong.MaxValue}");
+
+
+
+// 浮点型
+Console.WriteLine("-----------------------------");
+Console.WriteLine($"float: {float.MinValue} and {float.MaxValue}");
+Console.WriteLine($"double: {double.MinValue} and {float.MaxValue}");
+Console.WriteLine($"decimal: {decimal.MinValue} and {decimal.MaxValue}");
+
+
+// 引用数据类型
+int[] numberInt = new int[3];
+
+
+// 类型转换
+// 编译器进行安全转换(扩大转换)
+int numb1 = 10;
+decimal numb2 = 20m;
+decimal numb3 = numb1 + numb2;
+Console.WriteLine(numb3);
+
+// 强制转换(所需转换
+decimal numbf4 = 2222.12345667889m;
+float numbf5 = (float)numbf4;
+Console.WriteLine(numbf5);  // 编译器进行安全转换
+
+
+// 字符串转数字
+string abc = "10";
+string bbb = "20";
+Console.WriteLine($"{abc.ToString()} ,  {bbb.ToString()}");
+Console.WriteLine($"{int.Parse(abc)} , {int.Parse(bbb)}");
+
+
+// 字符串转数字2
+Console.WriteLine($"{Convert.ToInt32(abc)},    {Convert.ToInt32(bbb)}");
+
+
+// Conver 适合小数转换。 ooo 被舍去小数位变为1，  Convert.ToInt32 会进行四舍五入
+int ooo = (int)1.5m;
+int ppp = Convert.ToInt32(15m);
+Console.WriteLine($"{ooo} , {ppp}");
+
+// 无法将十进制转为int， 需要强转
+//int ddbbb = 222m;
+
+
+
+// 使用 TryParse进行字符串转数字，防止出现转换异常的问题
+string sA = "123";
+int  result = 0;
+if (int.TryParse(sA, out result)) 
+{
+    Console.WriteLine($"转换成功，{result}");
+}
+else
+{
+    Console.WriteLine("转换失败");
+}
+
+string bas = "Bob";
+int result1 = 0;
+if (int.TryParse(bas, out result1))
+{
+    Console.WriteLine($"转换成功，{bas}");
+}
+else
+{
+    Console.WriteLine("转换失败");
+}
+
+if (result1 > 0)
+{
+    Console.WriteLine("xxxxx");
+}
+
+
+
+// 练习
+string[] values = { "12.3", "45", "ABC", "11", "DEF" };
+string? message = null;
+
+decimal total1 = 0m;
+foreach (var value in values)
+{
+    decimal total;
+    if (!decimal.TryParse(value, out total))
+    {
+        message += value;
+    }
+    else
+    {
+        total1 += total;
+    }
+}
+
+Console.WriteLine($"message:{message} \n total :{total1}");
+
+
+// 练习2
+int value1 = 11;
+decimal value2 = 6.2m;
+float value3 = 4.3f;
+
+// Your code here to set result1
+// Hint: You need to round the result to nearest integer (don't just truncate)
+Console.WriteLine($"Divide value1 by value2, display the result as an int: {(int)(value1 / value2)}");
+Console.WriteLine($"Divide value1 by value2, display the result as an int: {Convert.ToInt32(value1 / value2)}");
+
+// Your code here to set result2
+Console.WriteLine($"Divide value2 by value3, display the result as a decimal: {value2 / (decimal) value3}");
+
+// Your code here to set result3
+Console.WriteLine($"Divide value3 by value1, display the result as a float: {value3 / value1}");
