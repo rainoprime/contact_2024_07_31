@@ -356,3 +356,210 @@ Console.WriteLine($"Divide value2 by value3, display the result as a decimal: {v
 
 // Your code here to set result3
 Console.WriteLine($"Divide value3 by value1, display the result as a float: {value3 / value1}");
+
+
+
+
+// 数组排序
+string[] pallets = { "B12", "A11", "B13", "A14"};
+
+Array.Sort(pallets);
+foreach (var pallet in pallets)
+{
+    Console.WriteLine(pallet);
+}
+
+Console.WriteLine("------------------------");
+// 数组反向排序
+Array.Reverse(pallets);
+foreach (var pallet in pallets)
+{
+    Console.WriteLine(pallet);
+}
+
+
+// 清除元素以及扩容数组
+Array.Clear(pallets, 0, 2); // 从下标0开始，清除两个元素
+Console.WriteLine("");
+foreach (var pallet in pallets)
+{
+    Console.WriteLine(pallet);
+}
+
+// 清除元素后，不是空字符串，而是null
+// foreach (var pallet in pallets)
+// {
+//     // Console.WriteLine(pallet.ToUpper());  报错
+// }
+
+// 扩容
+Console.WriteLine("");
+Array.Resize(ref pallets, 6);
+
+pallets[4] = "C22";
+pallets[5] = "C66";
+
+foreach (var pallet in pallets)
+{
+    Console.WriteLine(pallet);
+}
+
+// 通过减少容量达到清楚元素的目的
+Console.WriteLine("-------");
+
+Array.Resize(ref pallets, 3);
+
+foreach (var pallet in pallets)
+{
+    Console.WriteLine(pallet);
+}
+
+Console.WriteLine("------");
+// 将字符串转为数组
+string items = "abc123456";
+char[] charArray = items.ToCharArray();
+foreach (char c1 in charArray)
+{
+    Console.WriteLine(c1);
+}
+
+// 反向排列数组合并为新的字符串
+Array.Reverse(charArray);
+string newItems = new string(charArray);
+
+Console.WriteLine(newItems);
+
+Console.WriteLine("------");
+
+// 使用join 将所有字符合并为新的逗号分隔值字符串
+string joinItem = string.Join(',', charArray);
+
+Console.WriteLine(joinItem);
+
+Console.WriteLine("--------");
+
+// 使用split 拆分字符串数组
+string[] strings = joinItem.Split(',');
+foreach (string se in strings)
+{
+    Console.WriteLine(se);
+}
+
+ 
+// 字符串练习 打印ehT kciuq nworb xof spmuj revo eht yzal god
+string pangram = "The quick brown fox jumps over the lazy dog";
+
+var pangramSplit = pangram.Split(" ");
+
+for (var i = 0; i < pangramSplit.Length; i++)
+{
+    var array = pangramSplit[i].ToCharArray();
+    Array.Reverse(array);
+    pangramSplit[i] = new string(array);
+}
+
+var join = string.Join(" ", pangramSplit);
+Console.WriteLine(join);
+
+
+// 字符串练习 长度不是4的标记为Error
+
+string orderStream = "B123,C234,A345,C15,B177,G3003,C235,B179";
+
+var orderStreamArray = orderStream.Split(",");
+
+Array.Sort(orderStreamArray);
+for (var i = 0; i < orderStreamArray.Length; i++)
+{
+    if (orderStreamArray[i].Length != 4)
+    {
+        orderStreamArray[i] = string.Concat(orderStreamArray[i], "- Error");
+    }
+
+    Console.WriteLine(orderStreamArray[i]);
+}
+
+
+
+
+// ================================================================================
+Console.WriteLine("===========================================");
+
+//重点： 字符串的格式化以及货币的处理
+string myName = "json";
+string yourName = "kjh";
+var format = string.Format("我叫{0}, 你叫{1}，我们都是程序员！", myName, yourName);
+var formatMyName = string.Format("{0}，{0}，{0}", myName, yourName);
+Console.WriteLine(format);
+Console.WriteLine(formatMyName);
+
+int numT1 = 10000;
+double numT2 = 923234534248.56555d;
+Console.WriteLine("以货币的方式展现");
+Console.WriteLine($"{numT1:C}");
+Console.WriteLine($"{numT2:C}");
+
+// 货币格式化
+Console.WriteLine("================================");
+Console.WriteLine($"{numT1:N1}");
+Console.WriteLine($"{numT2:N4}");
+
+// 设置百分比
+Console.WriteLine("================================");
+Console.WriteLine($"{numT1:P1}");
+Console.WriteLine($"{numT2:P3}");
+
+// 结合使用
+var s = string.Format("你有{0:C}这么多钱，我要{1:C} 这么多钱", numT2 - numT1, numT2);
+Console.WriteLine(s);
+s += $"{numT2:P} 占这个百分比";
+Console.WriteLine(s);
+
+
+
+// 字符串填充
+Console.WriteLine("---------------------------------");
+string testString = " pad _ this";
+var padRight = testString.PadLeft(20);
+Console.WriteLine(padRight);
+
+Console.WriteLine("==========================");
+
+// 填充替换
+var right = testString.PadRight(20, '=');
+Console.WriteLine(right);
+
+Console.WriteLine("=============================================");
+
+// 练习 - 完成将字符串内插应用于套用信函的挑战
+string customerName = "Ms. Barros";
+
+string currentProduct = "Magic Yield";
+int currentShares = 2975000;
+decimal currentReturn = 0.1275m;
+decimal currentProfit = 55000000.0m;
+
+string newProduct = "Glorious Future";
+decimal newReturn = 0.13125m;
+decimal newProfit = 63000000.0m;
+
+// Your logic here
+string messageT = string.Format("Dear {0}, \n As a customer of our {1} offering we are excited to tell you about a new financial product that would dramatically increase your return. \n Currently, you own {2:N2} shares at a return of {3:P2}.\n Our new product, {4} offers a return of {5:P2} .  Given your current volume, your potential profit would be {6:C2}."
+    ,customerName, currentProduct, currentShares, currentReturn, newProduct, newReturn, newProfit);
+
+Console.WriteLine(messageT);
+Console.WriteLine("Here's a quick comparison:\n");
+
+string comparisonMessage = "";
+
+// Your logic here
+var padRight1 = string.Format("{0:P2}", currentReturn).PadRight(9);
+var right1 = string.Format("{0:C2}", currentProfit).PadRight(20);
+
+var s1 = $"{newReturn:P2}".PadRight(9);
+var padRight2 = $"{newProfit:C2}".PadRight(20);
+
+comparisonMessage += string.Format("{0}{1}{2}\n", currentProduct.PadRight(20),padRight1,right1);
+comparisonMessage += string.Format("{0}{1}{2}\n", newProduct.PadRight(20),s1,padRight2);
+
+Console.WriteLine(comparisonMessage);
