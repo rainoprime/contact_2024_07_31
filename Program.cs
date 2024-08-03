@@ -1,6 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 // 输出
 
+using System.Runtime.CompilerServices;
 using System.Threading.Channels;
 
 Console.WriteLine("Hello World!");
@@ -563,3 +564,144 @@ comparisonMessage += string.Format("{0}{1}{2}\n", currentProduct.PadRight(20),pa
 comparisonMessage += string.Format("{0}{1}{2}\n", newProduct.PadRight(20),s1,padRight2);
 
 Console.WriteLine(comparisonMessage);
+
+
+
+Console.WriteLine("==================================================");
+// 字符串获取下标
+string messageAge = "Find what is (inside the parentheses)";
+
+int agineIndex = messageAge.IndexOf("(");
+int endIndex = messageAge.IndexOf(")");
+
+Console.WriteLine(agineIndex);
+Console.WriteLine(endIndex);
+
+agineIndex += 1;
+// 字符串截取
+var index = endIndex - agineIndex;
+Console.WriteLine(messageAge.Substring(agineIndex, index));
+
+
+
+// 字符串 magic 值
+string messageSpan = "What is the value <span>between the tags</span>?";
+
+const string startSpan = "<span>";
+const string endSpan = "</span>";
+
+var indexOf = messageSpan.IndexOf(startSpan);
+var of = messageSpan.IndexOf(endSpan);
+
+indexOf += 6;
+
+int endLength = of - indexOf;
+
+Console.WriteLine(messageSpan.Substring(indexOf, endLength));
+
+
+
+// 字符串的indexofany
+string messageEnd = "你是谁，(不知道),但肯定不是我{111}";
+
+Console.WriteLine(messageEnd);
+
+char[] indexArray = { '{', '[', '(' };
+
+var indexOfAny = messageEnd.IndexOfAny(indexArray);
+
+Console.WriteLine(messageEnd.Substring(indexOfAny));
+
+
+int startIndex1 = 4;
+
+var ofAny = messageEnd.IndexOfAny(indexArray, startIndex1);
+Console.WriteLine(messageEnd.Substring(ofAny));
+
+
+
+// 字符串的remove和relace方法
+string removeMessage = "1235345345345Json tuiasn ,.asdozxjweew 0000 3";
+
+// 从下标13开始，删除25个字符
+var remove = removeMessage.Remove(13, 26);
+Console.WriteLine(remove);
+
+string replaceMessage = "1235345345345Json--tuiasn--,.a-sdozxjweew--00-00--3";
+
+var replace = replaceMessage.Replace("--", " ").Replace("-", "");
+Console.WriteLine(replace);
+
+
+// 字符串练习
+const string input = "<div><h2>Widgets &trade;</h2><span>5000</span></div>";
+
+string quantity = "";
+string output = "";
+
+// Your work here
+int spanStart = input.IndexOf("<span>") + 6;
+int spanEnd = input.IndexOf("</span>");
+
+var start = spanEnd - spanStart;
+
+quantity = input.Substring(spanStart, start);
+
+int divStart = input.IndexOf("<div>") + 5;
+int divEnd = input.IndexOf("</div>");
+
+var end = divEnd - divStart;
+
+output = input.Substring(divStart, end).Replace("&trade;", "&reg;");
+
+Console.WriteLine(quantity);
+Console.WriteLine(output);
+
+
+
+
+// 方法，显示随机数
+DisplayRandomNumbers();
+void DisplayRandomNumbers()
+{
+    Random random = new Random();
+    Console.WriteLine(random.Next(5,20));
+}
+
+
+//带参数的方法
+MethodRequest(10, "wabng", true);
+MethodRequest(10);
+
+void MethodRequest(int num, string name = "", bool flag = false)
+{
+    Console.WriteLine(num + name + flag);
+    
+}
+
+
+// 带返回值的方法
+var voidMethod = VoidMethod(10);
+Console.WriteLine(voidMethod);
+
+string VoidMethod(int num, string name = "aa", bool flag  = true)
+{
+    return num + name + flag;
+}
+
+
+// 调试
+string[] testArray = {"1", "2323", "23", "4"};
+var testArrayLength = testArray.Length;
+
+try
+{
+    Console.WriteLine(testArray[testArrayLength]);
+}
+catch (Exception e)
+{
+    Console.WriteLine("报错了");
+
+}
+
+Console.WriteLine("1");
